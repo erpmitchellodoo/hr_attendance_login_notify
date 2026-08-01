@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_users_view_form_attendance_login_notify" model="ir.ui.view">
+        <field name="name">res.users.form.attendance.login.notify</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="attendance_automation" string="Attendance Automation" groups="base.group_system,hr_attendance.group_hr_attendance_manager">
+                    <group>
+                        <field name="attendance_automation_enabled"/>
+                    </group>
+                    <group invisible="not attendance_automation_enabled">
+                        <group string="Missing Check-In Emails">
+                            <field name="attendance_checkin_reminder_minutes"/>
+                            <field name="attendance_checkin_repeat_minutes"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-info" role="alert" invisible="not attendance_automation_enabled">
+                        The first email is sent after the login delay and repeats until the employee checks in.
+                        Non-working days, approved time off, and flexible schedules are skipped.
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
